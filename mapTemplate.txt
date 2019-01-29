@@ -1,0 +1,9 @@
+num rooms
+room name
+room description
+num items
+item 1 name
+item 1 description
+item 2 name
+item 2 description
+possible directions

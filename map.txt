@@ -1,0 +1,17 @@
+2
+0
+Dorm room
+A standard dorm room
+1
+textbook
+A computer science textbook
+1, -1, -1, -1, -1, -1
+1
+CSI 388
+A classroom with computers set up in a U-shape with a whiteboard at the front.
+2
+computer
+A cheap Dell computer
+textbook
+A beaten, battered chemistry textbook
+-1, 2, -1, -1, -1, -1

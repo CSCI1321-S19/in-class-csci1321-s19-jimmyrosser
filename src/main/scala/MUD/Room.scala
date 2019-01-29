@@ -1,13 +1,14 @@
 package MUD
 
 class Room(
-    name: String,
-    desc: String,
-    private var items: List[Item],
+    number: Int,
+    roomName: String,
+    description: String,
+    private var inventory: List[Item],
     exits: Array[Int]) {
 
   def description(): String = {
-    desc
+    description
   }
   def getExits(dir: Int): Option[Room] = {
     if(exits(dir) == -1) None else Some(Room.rooms(exits(dir)))
@@ -24,19 +25,20 @@ object Room {
   val rooms = readRooms()
   
   def readRooms(): Array[Room] = {
-    val source = scala.io.Source.fromFile("mapMUD.txt")
+    val source = scala.io.Source.fromFile("map.txt")
     val lines = source.getLines()
     val rooms = Array.fill(lines.next.trim.toInt)(readRoom(lines))
     source.close()
     rooms
   }
   def readRoom(lines: Iterator[String]): Room = {
+    val number = lines.next.toInt
     val name = lines.next
     val desc = lines.next
     val items = List.fill(lines.next.trim.toInt) {
       Item(lines.next, lines.next)
     }
     val exits = lines.next.split(",").map(_.trim.toInt)
-    new Room(name, desc, items, exits)
+    new Room(number, name, desc, items, exits)
   }
 }
