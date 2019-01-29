@@ -1,3 +1,5 @@
+total number of rooms
+//start of rooms
 num rooms
 room name
 room description
@@ -7,3 +9,4 @@ item 1 description
 item 2 name
 item 2 description
 possible directions
+//end of rooms

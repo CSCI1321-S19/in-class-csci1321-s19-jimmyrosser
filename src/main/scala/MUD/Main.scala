@@ -1,26 +1,15 @@
 package MUD
 
 import io.StdIn._
-class Main {
+
+object Main {
   def main(args: Array[String]): Unit = {
     val player1 = new Player("Joe Biden", 0, List[Item](new Item("Medal", "A medal for being the best V.P of the United States"), new Item("Gun", "An ex V.P. always carries a gun")))
+    val help = "Possible commands:\n\n\tDirections (varies by room)\n\t\tNorth(n)\n\t\tSouth(s)\n\t\tEast(e)\n\t\tWest(w)\n\t\tUp(u)\n\t\tDown(d)\n\n\tLook: Reprints the description of the room.\n\tGet \"Item\": Allows you to pick up an item in the room and add it to your inventory.\n\tDrop \"Item\": Allows you to remove an item from your inventory and drop it into the current room.\n\tInventory(inv): Lists the items in your inventory."
     var input = readLine.toLowerCase
-    while(input != "quit" || input != "q") {
+    do {
       if(input == "help" || input == "h") {
-        println("Possible commands:")
-        println("")
-        println("\tDirections (varies by room)")
-        println("\t\tNorth(n)")
-        println("\t\tSouth(s)")
-        println("\t\tEast(e)")
-        println("\t\tWest(w)")
-        println("\t\tUp(u)")
-        println("\t\tDown(d)")
-        println("")
-        println("\tLook: Reprints the description of the room.")
-        println("\tGet \"Item\": Allows you to pick up an item in the room and add it to your inventory.")
-        println("\tDrop \"Item\": Allows you to remove an item from your inventory and drop it into the current room.")
-        println("\tInventory(inv): Lists the items in your inventory")
+        println(help)
       }
       else if(input == "north" || input == "n") {
         if(Room.rooms(player1.getLoc).getExits(0) == None) {
@@ -84,21 +73,21 @@ class Main {
         val getItem = input.splitAt(3)
         val itemName = getItem._2
         var item = Room.rooms(player1.getLoc).getItem(itemName)
-        item match {
-          case None => println("That is not an item in this room.")
+        //item match {
+          //case None => println("That is not an item in this room.")
           //case Some(_) => Room.rooms(player1.getLoc).dropItem(Item)
         }
-      }
+      //}
       //HELP WITH OPTION
       else if(input.startsWith("drop")) {
         val getItem = input.splitAt(3)
         val itemName = getItem._2
         var item = player1.getFromInventory(itemName)
-        item match {
-          case None => println("That is not an item that you have in your inventory")
+        //item match {
+          //case None => println("That is not an item that you have in your inventory")
           //case Some(_) => Room.rooms(player1.getLoc).dropItem(Item)
         }
-      }
+      //}
       else if(input == "inventory" || input == "inv") {
         println(player1.getInv) 
       }
@@ -112,6 +101,6 @@ class Main {
     Room.rooms(0).get  
     */
     
-    }
-  }    
+    }while(input.toLowerCase != "exit")
+  }
 }
