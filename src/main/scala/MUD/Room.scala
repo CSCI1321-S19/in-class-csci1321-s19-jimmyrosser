@@ -7,7 +7,13 @@ class Room(
     private var inventory: List[Item],
     exits: Array[Int]) {
 
-  def description(): String = {
+  def getRoomName(): String = {
+    roomName
+  }
+  def getRoomNum(): Int = {
+    number
+  }
+  def getRoomDesc(): String = {
     description
   }
   def getExits(dir: Int): Option[Room] = {
@@ -17,7 +23,48 @@ class Room(
     ???
   }
   def dropItem(item: Item): Unit = {
-    
+    ???
+  }
+  def printExits(): List[String] = {
+    var exitList = List[String]()
+    if(exits(0) != -1) {
+      "North" :: exitList 
+    }
+    else {
+      Nil :: exitList
+    }
+    if(exits(1) != -1) {
+      "South" :: exitList 
+    }
+    else {
+      Nil :: exitList
+    }
+    if(exits(2) != -1) 
+    {
+      "East" :: exitList 
+    }
+    else {
+      Nil :: exitList
+    }
+    if(exits(3) != -1) {
+      "West" :: exitList
+    }
+    else {
+      Nil :: exitList
+    }
+    if(exits(4) != -1) {
+      "Up" :: exitList 
+    }
+    else {
+      Nil :: exitList
+    }
+    if(exits(5) != -1) {
+      "Down" :: exitList 
+    }
+    else {
+      Nil :: exitList
+    }
+    exitList
   }
 }
 
@@ -40,5 +87,10 @@ object Room {
     }
     val exits = lines.next.split(",").map(_.trim.toInt)
     new Room(number, name, desc, items, exits)
+  }
+  def printRoom(roomNum: Int): Unit = {
+    println(Room.rooms(roomNum).getRoomName)
+    println(Room.rooms(roomNum).getRoomDesc)
+    println(Room.rooms(roomNum).printExits.mkString(", "))
   }
 }
