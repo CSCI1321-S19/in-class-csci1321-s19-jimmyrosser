@@ -1,7 +1,6 @@
 package MUD
 
 class Room(
-    number: Int,
     roomName: String,
     description: String,
     private var inventory: List[Item],
@@ -10,9 +9,6 @@ class Room(
   def getRoomName(): String = {
     roomName
   }
-  def getRoomNum(): Int = {
-    number
-  }
   def getRoomDesc(): String = {
     description
   }
@@ -20,51 +16,63 @@ class Room(
     if(exits(dir) == -1) None else Some(Room.rooms(exits(dir)))
   }
   def getItem(itemName: String): Option[Item] = {
-    ???
+    val item = inventory.find(_.name.toLowerCase == itemName)
+    item match {
+      case None => None
+      case Some(i) => inventory = inventory.dropWhile(_.name == itemName)
+    }
+    item
   }
   def dropItem(item: Item): Unit = {
-    ???
+    inventory = item :: inventory
   }
   def printExits(): List[String] = {
     var exitList = List[String]()
     if(exits(0) != -1) {
-      "North" :: exitList 
+      exitList = "North" :: exitList 
     }
-    else {
-      Nil :: exitList
-    }
+  
     if(exits(1) != -1) {
-      "South" :: exitList 
+      exitList = "South" :: exitList 
     }
-    else {
-      Nil :: exitList
-    }
+   
     if(exits(2) != -1) 
     {
-      "East" :: exitList 
+      exitList = "East" :: exitList 
     }
-    else {
-      Nil :: exitList
-    }
+    
     if(exits(3) != -1) {
-      "West" :: exitList
+      exitList = "West" :: exitList
     }
-    else {
-      Nil :: exitList
-    }
+    
     if(exits(4) != -1) {
-      "Up" :: exitList 
+      exitList = "Up" :: exitList 
     }
-    else {
-      Nil :: exitList
-    }
+    
     if(exits(5) != -1) {
-      "Down" :: exitList 
+      exitList = "Down" :: exitList 
     }
-    else {
-      Nil :: exitList
-    }
+    
     exitList
+  }
+  def printRoom(): Unit = {
+    println(getRoomName)
+    println(getRoomDesc)
+    println("")
+    println("Possible Exits:\n\t" + printExits.mkString(", "))
+    println("")
+    println(printItems)
+    
+  }
+  def printItems(): String = {
+    var i = 0
+    var inv = "Items in room:\n\t"
+    if (inventory.isEmpty) inv += "Empty"
+    while (i < inventory.length) {
+      inv = inv + (inventory(i).name + "- " + inventory(i).desc + "\n\t")
+      i += 1
+    }
+    inv
   }
 }
 
@@ -79,18 +87,12 @@ object Room {
     rooms
   }
   def readRoom(lines: Iterator[String]): Room = {
-    val number = lines.next.toInt
     val name = lines.next
     val desc = lines.next
     val items = List.fill(lines.next.trim.toInt) {
       Item(lines.next, lines.next)
     }
     val exits = lines.next.split(",").map(_.trim.toInt)
-    new Room(number, name, desc, items, exits)
-  }
-  def printRoom(roomNum: Int): Unit = {
-    println(Room.rooms(roomNum).getRoomName)
-    println(Room.rooms(roomNum).getRoomDesc)
-    println(Room.rooms(roomNum).printExits.mkString(", "))
+    new Room(name, desc, items, exits)
   }
 }

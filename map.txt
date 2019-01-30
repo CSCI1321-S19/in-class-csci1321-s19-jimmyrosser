@@ -1,12 +1,10 @@
-2
-0
+3
 Dorm room
-A standard dorm room
+A typical college student's dorm room.
 1
-textbook
-A computer science textbook
+beer bottle
+An empty beer bottle
 1, -1, -1, -1, -1, -1
-1
 CSI 388
 A classroom with computers set up in a U-shape with a whiteboard at the front.
 2
@@ -14,4 +12,12 @@ computer
 A cheap Dell computer
 textbook
 A beaten, battered chemistry textbook
--1, 2, -1, -1, -1, -1
+-1, 0, 2, -1, -1, -1
+Bathroom
+A freshly cleaned bathroom
+2
+toilet paper
+A roll of toilet paper
+soap
+A bar of soap
+-1, -1, -1, 1, -1, -1
