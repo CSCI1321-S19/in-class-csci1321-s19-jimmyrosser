@@ -14,6 +14,6 @@ object Main {
     do {
       input = readLine.toLowerCase
       player.processCommand(input)
-    } while(input.toLowerCase != "exit")
+    } while (input.toLowerCase != "exit")
   }
 }

@@ -72,6 +72,8 @@ class Player(
       case None => None
       case Some(i) => {
         inventory = inventory.dropWhile(_.name == itemName)
+        //For some reason, sometimes, the item gets dropped from the inventory; and sometimes, it stays in the inventory and gets copied into the room.
+        //The TA tried to help, but he didn't know what to do
       }
     }
     item
